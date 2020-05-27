@@ -19,8 +19,7 @@ const theme = {
     },
   },
   breakpoints: {
-    mobile: '375px',
-    desktop: '1440px',
+    mobile: '@media (max-width: 768px)',
   },
 }
 

@@ -6,6 +6,8 @@ import data from './data'
 import GlobalStyle from 'theme/Global'
 import theme from 'theme'
 import JobFilters from 'components/JobFilters'
+import bgDesktop from 'assets/bg-header-desktop.svg'
+import bgMobile from 'assets/bg-header-mobile.svg'
 
 const AppWrapper = styled.div`
   min-height: 100vh;
@@ -17,9 +19,11 @@ const AppWrapper = styled.div`
 const Main = styled.main`
   flex: 1;
   margin: 0 auto;
-  padding-top: 76px;
-  padding-bottom: 120px;
+  padding: 76px 0px 120px;
   position: relative;
+  ${props => props.theme.breakpoints.mobile} {
+    padding: 60px 24px 34px;
+  }
 `
 
 function App() {
@@ -28,7 +32,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <AppWrapper>
-        <Header />
+        <Header backgroundDesktop={bgDesktop} backgroundMobile={bgMobile} />
         <Main>
           {filters.length > 0 && (
             <JobFilters filters={filters} setFilters={setFilters} />
