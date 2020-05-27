@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Flex from './Flex'
 
 const JobFiltersWrapper = styled.div`
   background-color: ${props => props.theme.colors.white};
@@ -10,8 +9,9 @@ const JobFiltersWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 20px 40px;
-  position: absolute;
-  top: -36px;
+  margin-top: -114px;
+  margin-bottom: 42px;
+  left: 0px;
   width: 100%;
   button {
     background: none;
@@ -24,16 +24,17 @@ const JobFiltersWrapper = styled.div`
     }
   }
 `
+
 const Filter = styled.div`
-  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0px 0px 0px 8px;
   background-color: ${props => props.theme.colors.neutral[1]};
   border-radius: 4px;
-  :not(:first-child) {
-    margin-left: 16px;
+  margin-top: 16px;
+  :not(:last-child) {
+    margin-right: 16px;
   }
   span {
     color: ${props => props.theme.colors.primary};
@@ -59,6 +60,12 @@ const Filter = styled.div`
   }
 `
 
+const SelectedFilters = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -16px;
+`
+
 const JobFilters = ({ filters, setFilters }) => {
   const clearFilters = () => {
     setFilters([])
@@ -71,7 +78,7 @@ const JobFilters = ({ filters, setFilters }) => {
   }
   return (
     <JobFiltersWrapper>
-      <Flex>
+      <SelectedFilters>
         {filters.map(filter => (
           <Filter key={filter}>
             <span>{filter}</span>
@@ -90,7 +97,7 @@ const JobFilters = ({ filters, setFilters }) => {
             </button>
           </Filter>
         ))}
-      </Flex>
+      </SelectedFilters>
       <button onClick={clearFilters}>Clear</button>
     </JobFiltersWrapper>
   )

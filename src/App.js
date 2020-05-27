@@ -11,6 +11,7 @@ import bgMobile from 'assets/bg-header-mobile.svg'
 
 const AppWrapper = styled.div`
   min-height: 100vh;
+  max-width: 100vw;
   display: flex;
   flex-direction: column;
   background-color: ${props => props.theme.colors.neutral[0]};
@@ -19,8 +20,12 @@ const AppWrapper = styled.div`
 const Main = styled.main`
   flex: 1;
   margin: 0 auto;
-  padding: 76px 0px 120px;
+  padding: 76px 120px 120px;
   position: relative;
+  width: 100%;
+  max-width: 1366px;
+  display: flex;
+  flex-direction: column;
   ${props => props.theme.breakpoints.mobile} {
     padding: 60px 24px 34px;
   }

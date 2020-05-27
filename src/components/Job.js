@@ -1,26 +1,37 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import Flex from './Flex'
 import Divider from './Divider'
 
 const JobWrapper = styled.li`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #ffffff;
-  max-width: 1110px;
   padding: 32px 40px;
   box-shadow: 0px 15px 20px rgba(13, 113, 130, 0.15);
   border-radius: 5px;
-  min-width: 1110px;
   border-left: ${props =>
     props.featured ? `5px solid ${props.theme.colors.primary}` : ''};
+  ${props => props.theme.breakpoints.mobile} {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 `
 const Avatar = styled.img`
   border-radius: 9999px;
   height: 88px;
   width: 88px;
   margin-right: 24px;
+  ${props => props.theme.breakpoints.mobile} {
+    position: absolute;
+    top: -24px;
+    left: 24px;
+    height: 48px;
+    width: 48px;
+    margin: 0;
+  }
 `
 const Label = styled.span`
   background-color: #000000;
@@ -63,14 +74,17 @@ const MoreInfo = styled.div`
 `
 const Tags = styled.div`
   display: flex;
-  justify-content: flex-end;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: center;
+  margin-top: -16px;
   span {
     cursor: pointer;
     background-color: ${props => props.theme.colors.neutral[1]};
     color: ${props => props.theme.colors.primary};
     font-weight: ${props => props.theme.typography.fontWeight.bold};
     margin-left: 16px;
+    margin-top: 16px;
     padding: 4px 8px 4px 8px;
     border-radius: 4px;
     font-size: 13px;
@@ -98,9 +112,12 @@ const Job = React.memo(
     tools,
     setFilters,
   }) => {
-    const addFilter = newFilter => {
-      setFilters(prevFilters => [...new Set([...prevFilters, newFilter])])
-    }
+    const addFilter = useCallback(
+      newFilter => {
+        setFilters(prevFilters => [...new Set([...prevFilters, newFilter])])
+      },
+      [setFilters],
+    )
     return (
       <JobWrapper featured={featured}>
         <Flex>
@@ -116,7 +133,8 @@ const Job = React.memo(
               <MoreInfo>
                 <span>{postedAt}</span>
                 <Divider />
-                <span>{contract}</span> <Divider />
+                <span>{contract}</span>
+                <Divider />
                 <span>{location}</span>
               </MoreInfo>
             </Flex>

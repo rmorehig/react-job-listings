@@ -5,6 +5,9 @@ import Job from './Job'
 const JobListWrapper = styled.ul`
   li:not(:first-child) {
     margin-top: 24px;
+    ${props => props.theme.breakpoints.mobile} {
+      margin-top: 40px;
+    }
   }
 `
 const JobList = ({ jobs = [], setFilters }) => {
