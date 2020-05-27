@@ -25,5 +25,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  button{
+    border: none;
+    cursor: pointer;
+    outline:none;
+    font-family: ${props => props.theme.typography.fontFamily}, sans-serif;
+  }
 `
 export default GlobalStyle

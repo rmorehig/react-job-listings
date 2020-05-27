@@ -9,7 +9,6 @@ const JobWrapper = styled.li`
   align-items: center;
   background-color: #ffffff;
   max-width: 1110px;
-  margin-top: 24px;
   padding: 32px 40px;
   box-shadow: 0px 15px 20px rgba(13, 113, 130, 0.15);
   border-radius: 5px;
@@ -67,6 +66,7 @@ const Tags = styled.div`
   justify-content: flex-end;
   align-items: center;
   span {
+    cursor: pointer;
     background-color: ${props => props.theme.colors.neutral[1]};
     color: ${props => props.theme.colors.primary};
     font-weight: ${props => props.theme.typography.fontWeight.bold};
@@ -75,51 +75,63 @@ const Tags = styled.div`
     border-radius: 4px;
     font-size: 13px;
     line-height: 24px;
+    &:hover {
+      background-color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.white};
+    }
   }
 `
 
-const Job = ({
-  company,
-  logo,
-  new: isNew,
-  featured,
-  position,
-  role,
-  level,
-  postedAt,
-  contract,
-  location,
-  languages,
-  tools,
-}) => {
-  return (
-    <JobWrapper featured={featured}>
-      <Flex>
-        <Avatar src={logo} />
-        <Flex direction="column" align="flex-start" justify="space-between">
-          <Flex>
-            <Company>{company}</Company>
-            {isNew && <Label variant="primary">NEW!</Label>}
-            {featured && <Label>FEATURED</Label>}
-          </Flex>
-          <Position>{position}</Position>
-          <Flex>
-            <MoreInfo>
-              <span>{postedAt}</span>
-              <Divider />
-              <span>{contract}</span> <Divider />
-              <span>{location}</span>
-            </MoreInfo>
+const Job = React.memo(
+  ({
+    company,
+    logo,
+    new: isNew,
+    featured,
+    position,
+    role,
+    level,
+    postedAt,
+    contract,
+    location,
+    languages,
+    tools,
+    setFilters,
+  }) => {
+    const addFilter = newFilter => {
+      setFilters(prevFilters => [...new Set([...prevFilters, newFilter])])
+    }
+    return (
+      <JobWrapper featured={featured}>
+        <Flex>
+          <Avatar src={logo} />
+          <Flex direction="column" align="flex-start" justify="space-between">
+            <Flex>
+              <Company>{company}</Company>
+              {isNew && <Label variant="primary">NEW!</Label>}
+              {featured && <Label>FEATURED</Label>}
+            </Flex>
+            <Position>{position}</Position>
+            <Flex>
+              <MoreInfo>
+                <span>{postedAt}</span>
+                <Divider />
+                <span>{contract}</span> <Divider />
+                <span>{location}</span>
+              </MoreInfo>
+            </Flex>
           </Flex>
         </Flex>
-      </Flex>
-      <Tags>
-        {[role, level, ...languages, ...tools].map(item => (
-          <span>{item}</span>
-        ))}
-      </Tags>
-    </JobWrapper>
-  )
-}
+        <Tags>
+          {[role, level, ...languages, ...tools].map((item, index) => (
+            <span key={index} onClick={() => addFilter(item)}>
+              {item}
+            </span>
+          ))}
+        </Tags>
+      </JobWrapper>
+    )
+  },
+)
 
 export default Job

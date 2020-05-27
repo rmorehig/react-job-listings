@@ -1,14 +1,20 @@
 import React from 'react'
+import styled from 'styled-components'
 import Job from './Job'
 
-const JobList = ({ jobs = [] }) => {
+const JobListWrapper = styled.ul`
+  li:not(:first-child) {
+    margin-top: 24px;
+  }
+`
+const JobList = ({ jobs = [], setFilters }) => {
   return (
     <section>
-      <ul>
+      <JobListWrapper>
         {jobs.map(({ id, ...rest }) => (
-          <Job key={id} {...rest} />
+          <Job key={id} {...rest} setFilters={setFilters} />
         ))}
-      </ul>
+      </JobListWrapper>
     </section>
   )
 }
