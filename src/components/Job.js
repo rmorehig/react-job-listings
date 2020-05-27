@@ -14,7 +14,7 @@ const JobWrapper = styled.li`
   border-radius: 5px;
   border-left: ${props =>
     props.featured ? `5px solid ${props.theme.colors.primary}` : ''};
-  ${props => props.theme.breakpoints.mobile} {
+  ${props => props.theme.breakpoints.lg} {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -24,7 +24,7 @@ const Avatar = styled.img`
   height: 88px;
   width: 88px;
   margin-right: 24px;
-  ${props => props.theme.breakpoints.mobile} {
+  ${props => props.theme.breakpoints.lg} {
     position: absolute;
     top: -24px;
     left: 24px;
@@ -83,7 +83,7 @@ const Tags = styled.div`
     background-color: ${props => props.theme.colors.neutral[1]};
     color: ${props => props.theme.colors.primary};
     font-weight: ${props => props.theme.typography.fontWeight.bold};
-    margin-left: 16px;
+    margin-right: 16px;
     margin-top: 16px;
     padding: 4px 8px 4px 8px;
     border-radius: 4px;
@@ -93,6 +93,13 @@ const Tags = styled.div`
       background-color: ${props => props.theme.colors.primary};
       color: ${props => props.theme.colors.white};
     }
+  }
+`
+const Line = styled.div`
+  ${props => props.theme.breakpoints.lg} {
+    border-bottom: 1px solid #b7c4c4;
+    width: 100%;
+    margin: 16px 0;
   }
 `
 
@@ -121,7 +128,7 @@ const Job = React.memo(
     return (
       <JobWrapper featured={featured}>
         <Flex>
-          <Avatar src={logo} />
+          <Avatar src={logo} alt="logo" />
           <Flex direction="column" align="flex-start" justify="space-between">
             <Flex>
               <Company>{company}</Company>
@@ -129,17 +136,16 @@ const Job = React.memo(
               {featured && <Label>FEATURED</Label>}
             </Flex>
             <Position>{position}</Position>
-            <Flex>
-              <MoreInfo>
-                <span>{postedAt}</span>
-                <Divider />
-                <span>{contract}</span>
-                <Divider />
-                <span>{location}</span>
-              </MoreInfo>
-            </Flex>
+            <MoreInfo>
+              <span>{postedAt}</span>
+              <Divider />
+              <span>{contract}</span>
+              <Divider />
+              <span>{location}</span>
+            </MoreInfo>
           </Flex>
         </Flex>
+        <Line />
         <Tags>
           {[role, level, ...languages, ...tools].map((item, index) => (
             <span key={index} onClick={() => addFilter(item)}>

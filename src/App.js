@@ -26,7 +26,7 @@ const Main = styled.main`
   max-width: 1366px;
   display: flex;
   flex-direction: column;
-  ${props => props.theme.breakpoints.mobile} {
+  ${props => props.theme.breakpoints.sm} {
     padding: 60px 24px 34px;
   }
 `
