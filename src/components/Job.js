@@ -46,7 +46,7 @@ const Label = styled.span`
   padding: 8px 8px 4px 8px;
   margin-right: ${props => (props.variant === 'primary' ? '8px' : '')};
 `
-const Position = styled.p`
+const Position = styled.h2`
   font-size: 18px;
   line-height: 24px;
   font-weight: ${props => props.theme.typography.fontWeight.bold};
