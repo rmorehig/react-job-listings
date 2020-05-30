@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
-import Flex from './Flex'
+import Flex, { FlexColumn } from './Flex'
 import Divider from './Divider'
 
 const JobWrapper = styled.li`
@@ -129,7 +129,7 @@ const Job = React.memo(
       <JobWrapper featured={featured}>
         <Flex>
           <Avatar src={logo} alt="logo" />
-          <Flex direction="column" align="flex-start" justify="space-between">
+          <FlexColumn align="flex-start" justify="space-between">
             <Flex>
               <Company>{company}</Company>
               {isNew && <Label variant="primary">NEW!</Label>}
@@ -143,7 +143,7 @@ const Job = React.memo(
               <Divider />
               <span>{location}</span>
             </MoreInfo>
-          </Flex>
+          </FlexColumn>
         </Flex>
         <Line />
         <Tags>
